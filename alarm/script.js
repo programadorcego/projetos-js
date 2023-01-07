@@ -1,12 +1,14 @@
 function countDown()
 {
-	let hours = 0 * 60 * 60 * 1000;
-	let minutes = 0 * 60 * 1000;
-	let seconds = 10 * 1000;
-	let countDown = new Date(new Date().getTime() + hours + minutes + seconds).getTime()
+	let now = new Date();
+	
+	let hours = parseInt(document.querySelector('#hour').value);
+	let minutes = parseInt(document.querySelector('#minutes').value);
+	
+	let countDown = (hours <= now.getHours() && minutes <= now.getMinutes()) ? new Date(now.setDate(now.getDate() + 1)).setHours(hours, minutes, 0) : new Date().setHours(hours, minutes, 0);
 
 	let x = setInterval(() => {
-		let now = new Date().getTime();
+		now = new Date().getTime();
 		let distance = countDown - now;
 		
 		hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
