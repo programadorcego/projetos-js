@@ -2,20 +2,38 @@
 <html>
 	<head>
 		  <meta charset="UTF-8">
-		  <title>Lista de Tarefas</title>
+		  <title>Accordion</title>
 		  
 		  <link rel="stylesheet" href="style.css">
 	</head>
 	
 	<body>
-	<h1>Lista de Tarefas</h1>
+	<h1>Accordion</h1>
 	
-	<label for="taskInput">Tarefa</label>
-	<input type="texxt" id="taskInput" placeholder="Informe a Tarefa">
-	<button id="addTaskButton">Adicionar</button>
-	
-	<ul id="toDoList">
-	</ul>
+	<div class="accordion-container">
+		<div class="accordion-item">
+			<button id="accordion-button-1" class="accordion-button active" aria-expanded="true" aria-controls="accordion-panel-1">Título 1</button>
+			
+			<section id="accordion-panel-1" aria-labelledby="accordion-button-1" class="panel expanded">
+				<p>Conteúdo 1</p>
+			</section>
+		</div>
+		
+		<div class="accordion-item">
+			<button id="accordion-button-2" class="accordion-button" aria-expanded="false" aria-controls="accordion-panel-2">Título 2</button>
+			
+			<section id="accordion-panel-2" aria-labelledby="accordion-button-2" class="panel">
+				<p>Conteúdo 2</p>
+			</section>
+		</div>
+		
+		<button id="accordion-button-3" class="accordion-button" aria-expanded="false" aria-controls="accordion-panel-3">Título 3</button>
+			
+			<section id="accordion-panel-3" aria-labelledby="accordion-button-3" class="panel">
+				<p>Conteúdo 3</p>
+			</section>
+		</div>
+	</div>
 	
 	<script src="main.js"></script>
 	</body>

@@ -1,55 +1,30 @@
 * {box-sizing: border-box;}
 
-#toDoList {
-	margin: 0;
-	padding: 0;
-	list-style: none;
-}
-
-#toDoList li {
-	cursor: pointer;
-	position: relative;
-	padding: 12px 8px 12px 40px;
+.accordion-button {
 	background: #eee;
-	font-size: 18px;
-	transition: 0.2s;
+	color: #444;
+	cursor: pointer;
+	padding: 18px;
+	width: 100%;
+	text-align: left;
+	border: none;
+	transition: 0.4s;
 }
 
-#toDoList li:nth-child(odd) {
-	background: #f9f9f9;
+.accordion-button.active,
+.accordion-header button:hover {
+	background: #ccc;
 }
 
-#toDoList li:hover {
-	background: #ddd;
+.panel {
+	padding: 0 18px;
+	background: #fff;
+	overflow: hidden;
+	visibility: hidden;
+	min-height: 0;
+	transition: min-height .5s ease-out 0s, visibility 0s .5s;
 }
 
-#toDoList li.checked {
-	background-color: #888;
-	color: #fff;
-	text-decoration: line-through;
-}
-
-#toDoList li.checked::before {
-	content: "";
-	position: absolute;
-	border-color: #fff;
-	border-style: solid;
-	border-width: 0 2px 2px 0;
-	top: 10px;
-	left: 16px;
-	transform: rotate(45deg);
-	width: 7px;
-	height: 15px;
-}
-
-.remove {
-	position: absolute;
-	right: 0;
-	top: 0;
-	padding: 12px 16px;
-}
-
-.remove:hover {
-	background: #f44336;
-	color: #fff;
+.expanded {
+	visibility: visible;
 }
