@@ -2,38 +2,16 @@
 <html>
 	<head>
 		  <meta charset="UTF-8">
-		  <title>Accordion</title>
-		  
-		  <link rel="stylesheet" href="style.css">
+		  <title>Cronômetro</title>
 	</head>
 	
 	<body>
-	<h1>Accordion</h1>
+	<h1>Cronômetro</h1>
 	
-	<div class="accordion-container">
-		<div class="accordion-item">
-			<button id="accordion-button-1" class="accordion-button active" aria-expanded="true" aria-controls="accordion-panel-1">Título 1</button>
-			
-			<section id="accordion-panel-1" aria-labelledby="accordion-button-1" class="panel expanded">
-				<p>Conteúdo 1</p>
-			</section>
-		</div>
-		
-		<div class="accordion-item">
-			<button id="accordion-button-2" class="accordion-button" aria-expanded="false" aria-controls="accordion-panel-2">Título 2</button>
-			
-			<section id="accordion-panel-2" aria-labelledby="accordion-button-2" class="panel">
-				<p>Conteúdo 2</p>
-			</section>
-		</div>
-		
-		<button id="accordion-button-3" class="accordion-button" aria-expanded="false" aria-controls="accordion-panel-3">Título 3</button>
-			
-			<section id="accordion-panel-3" aria-labelledby="accordion-button-3" class="panel">
-				<p>Conteúdo 3</p>
-			</section>
-		</div>
-	</div>
+	<button id="start">Iniciar</button>
+	<button id="stop" disabled>Parar</button>
+	
+	<p><span id="timer">00:00:00</span></p>
 	
 	<script src="main.js"></script>
 	</body>

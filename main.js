@@ -1,23 +1,35 @@
-const buttons = document.querySelectorAll(".accordion-button");
+const startBtn = document.querySelector("#start");
+const stopBtn = document.querySelector("#stop");
+const timer = document.querySelector("#timer");
 
-buttons.forEach(button => {
-	button.addEventListener("click", e => {
-		buttons.forEach(button => {
-			button.setAttribute("aria-expanded", false);
-			button.classList = "accordion-button";
-			
-			const panel = document.querySelector(`#${button.getAttribute("aria-controls")}`);
-			panel.style.minHeight = 0;
-			panel.classList = "panel";
-		});
-		
-		const targetElement = e.target;
-		const panel = document.querySelector(`#${targetElement.getAttribute("aria-controls")}`);
-		
-		targetElement.classList.add("active");
-		targetElement.setAttribute("aria-expanded", true);
-		
-		panel.classList.add("expanded");
-		panel.style.minHeight = `${panel.scrollHeight}px`;
-	});
+let time = 0;
+let timerInterval;
+
+startBtn.addEventListener("click", () => {
+	startBtn.disabled = true;
+	stopBtn.disabled = false;
+	timerInterval = setInterval(updateTimer, 1000);
 });
+
+stopBtn.addEventListener("click", () => {
+	stopBtn.disabled = true;
+	startBtn.disabled = false;
+	
+	clearInterval(timerInterval);
+});
+
+function updateTimer()
+{
+	time += 1000;
+	
+	const hours = Math.floor(time / (1000 * 60 * 60));
+	const minutes = Math.floor((time % (1000 * 60 *60)) / (1000 * 60));
+	const seconds = Math.floor((time % (1000 * 60)) / 1000);
+	
+	timer.textContent = `${formatTime(hours)}:${formatTime(minutes)}:${formatTime(seconds)}`;
+}
+
+function formatTime(time)
+{
+	return time < 10 ? `0${time}` : time;
+}
