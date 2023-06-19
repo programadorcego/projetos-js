@@ -2,16 +2,21 @@
 <html>
 	<head>
 		  <meta charset="UTF-8">
-		  <title>Cronômetro</title>
+		  <title>Despertador</title>
 	</head>
 	
 	<body>
-	<h1>Cronômetro</h1>
+	<h1>Despertador</h1>
 	
-	<button id="start">Iniciar</button>
-	<button id="stop" disabled>Parar</button>
+	<label for="hour">Hora</label>
+	<input type="number" id="hour" min="0" max="23">
 	
-	<p><span id="timer">00:00:00</span></p>
+	<label for="minute">Minuto</label>
+	<input type="number" id="minute" min="0" max="59">
+	
+	<button id="setAlarmButton">Iniciar</button>
+	
+	<p><span id="countdown">00:00:00</span></p>
 	
 	<script src="main.js"></script>
 	</body>

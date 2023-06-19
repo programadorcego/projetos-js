@@ -1,32 +1,55 @@
-const startBtn = document.querySelector("#start");
-const stopBtn = document.querySelector("#stop");
-const timer = document.querySelector("#timer");
+const hourInput = document.querySelector("#hour");
+const minuteInput = document.querySelector("#minute");
+const setAlarmButton = document.querySelector("#setAlarmButton");
+const countdown = document.querySelector("#countdown");
+const alarmSound = new Audio("alarm.mp3");
 
-let time = 0;
-let timerInterval;
+let alarmTime;
+let alarmInterval;
 
-startBtn.addEventListener("click", () => {
-	startBtn.disabled = true;
-	stopBtn.disabled = false;
-	timerInterval = setInterval(updateTimer, 1000);
-});
+setAlarmButton.addEventListener("click", setAlarm);
 
-stopBtn.addEventListener("click", () => {
-	stopBtn.disabled = true;
-	startBtn.disabled = false;
-	
-	clearInterval(timerInterval);
-});
-
-function updateTimer()
+function setAlarm()
 {
-	time += 1000;
+	alarmSound.pause();
+	alarmSound.currentTime = 0;
 	
-	const hours = Math.floor(time / (1000 * 60 * 60));
-	const minutes = Math.floor((time % (1000 * 60 *60)) / (1000 * 60));
-	const seconds = Math.floor((time % (1000 * 60)) / 1000);
+	const currentTime = new Date();
+	alarmTime = new Date(
+		currentTime.getFullYear(),
+		currentTime.getMonth(),
+		currentTime.getDate(),
+		parseInt(hourInput.value),
+		parseInt(minuteInput.value)
+	).getTime();
 	
-	timer.textContent = `${formatTime(hours)}:${formatTime(minutes)}:${formatTime(seconds)}`;
+	if(alarmTime < currentTime.getTime())
+	{
+		alarmTime += 24 * 1000 * 60 * 60;
+	}
+	
+	alarmInterval = setInterval(updateTime, 1000);
+}
+
+function updateTime()
+{
+	const currentTime = new Date().getTime();
+	const remainingTime = alarmTime - currentTime;
+	
+	if(remainingTime <= 0)
+	{
+		alarmSound.loop = true;
+		alarmSound.play();
+		countdown.textContent = "00:00:00";
+		clearInterval(alarmInterval);
+		return;
+	}
+	
+	const hour = Math.floor((remainingTime / (1000 * 60 * 60)));
+	const minute = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
+	const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
+	
+	countdown.textContent = `${formatTime(hour)}:${formatTime(minute)}:${formatTime(seconds)}`;
 }
 
 function formatTime(time)
