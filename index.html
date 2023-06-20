@@ -2,21 +2,31 @@
 <html>
 	<head>
 		  <meta charset="UTF-8">
-		  <title>Despertador</title>
+		  <title>Aba</title>
+		  
+		  <link rel="stylesheet" href="style.css">
 	</head>
 	
 	<body>
-	<h1>Despertador</h1>
+	<h1>Abas</h1>
 	
-	<label for="hour">Hora</label>
-	<input type="number" id="hour" min="0" max="23">
+	<ul id="tablist" role="tablist">
+		<li><button id="tab1" class="tab active" tabindex="0" role="tab" aria-selected="true" aria-controls="content-1">Aba 1</button></li>
+		<li><button id ="tab2" class="tab" tabindex="-1" role="tab" aria-controls="content-2">Aba 2</button></li>
+		<li><button id="tab3" class="tab" tabindex="-1" role="tab" aria-controls="content-3">Aba 3</button></li>
+	</ul>
 	
-	<label for="minute">Minuto</label>
-	<input type="number" id="minute" min="0" max="59">
+	<div id="content-1" role="tabpanel" aria-labelledby="tab1" class="tabpanel show">
+		<p>Conteúdo da aba 1</p>
+	</div>
 	
-	<button id="setAlarmButton">Iniciar</button>
+	<div id="content-2" role="tabpanel" aria-labelledby="tab2" class="tabpanel">
+		<p>Conteúdo da aba 2</p>
+	</div>
 	
-	<p><span id="countdown">00:00:00</span></p>
+	<div id="content-3" role="tabpanel" aria-labelledby="tab3" class="tabpanel">
+		<p>Conteúdo da aba 3</p>
+	</div>
 	
 	<script src="main.js"></script>
 	</body>
