@@ -2,31 +2,26 @@
 <html>
 	<head>
 		  <meta charset="UTF-8">
-		  <title>Aba</title>
+		  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		  <title>Janela Modal</title>
 		  
 		  <link rel="stylesheet" href="style.css">
 	</head>
 	
 	<body>
-	<h1>Abas</h1>
+	<h1>Modal</h1>
 	
-	<ul id="tablist" role="tablist">
-		<li><button id="tab1" class="tab active" tabindex="0" role="tab" aria-selected="true" aria-controls="content-1">Aba 1</button></li>
-		<li><button id ="tab2" class="tab" tabindex="-1" role="tab" aria-controls="content-2">Aba 2</button></li>
-		<li><button id="tab3" class="tab" tabindex="-1" role="tab" aria-controls="content-3">Aba 3</button></li>
-	</ul>
+	<button id="openBtn">Abrir Modal</button>
 	
-	<div id="content-1" role="tabpanel" aria-labelledby="tab1" class="tabpanel show">
-		<p>Conteúdo da aba 1</p>
-	</div>
-	
-	<div id="content-2" role="tabpanel" aria-labelledby="tab2" class="tabpanel">
-		<p>Conteúdo da aba 2</p>
-	</div>
-	
-	<div id="content-3" role="tabpanel" aria-labelledby="tab3" class="tabpanel">
-		<p>Conteúdo da aba 3</p>
-	</div>
+	<div class="modal" role="dialog" aria-labeledby="modal-title" aria-modal="true">
+			<div class="modal-content" tabindex="0">
+				<span tabindex="0" class="close">&times;</span>
+				<h2 id="modal-title">Meu Modal</h2>
+				<p>Texto do Modal</p>
+			</div>
+		</div>
+		
+		<p>Conteúdo da Página</p>
 	
 	<script src="main.js"></script>
 	</body>
