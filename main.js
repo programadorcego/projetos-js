@@ -1,34 +1,26 @@
-const openBtn = document.querySelector("#openBtn");
-const modal = document.querySelector(".modal");
-const closeBtn = document.querySelector(".close");
+const startBtn = document.querySelector("#start");
+const progressBar = document.querySelector(".progressbar");
 
-openBtn.addEventListener("click", openModal);
-closeBtn.addEventListener("click", closeModal);
+startBtn.addEventListener("click", move);
 
-window.addEventListener("click", e => {
-	if(e.target == modal)
-	{
-		closeModal();
-	}
-});
-
-modal.addEventListener("keydown", e => {
-	if(e.key == "Escape")
-	{
-		e.preventDefault();
-		closeModal();
-	}
-});
-
-function openModal()
+function move()
 {
-	modal.style.visibility = "visible";
-	modal.style.opacity = "1";
-}
-
-function closeModal()
-{
-	modal.style.opacity = "0";
-	setTimeout(() => {modal.style.visibility = "Hidden"}, 300);
-	openBtn.focus();
+	let width = 0;
+	progressBar.setAttribute("aria-valuenow", width);
+	progressBar.style.width = `${width}%`;
+	progressBar.textContent = `${width}%`;
+	let interval = setInterval(frame, 100);
+	
+	function frame()
+	{
+		if(width >= 100)
+		{
+			return clearInterval(interval);
+		}
+		
+		width += 1;
+		progressBar.setAttribute("aria-valuenow", width);
+		progressBar.style.width = `${width}%`;
+		progressBar.textContent = `${width}%`;
+	}
 }

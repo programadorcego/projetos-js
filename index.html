@@ -3,25 +3,17 @@
 	<head>
 		  <meta charset="UTF-8">
 		  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-		  <title>Janela Modal</title>
+		  <title>Barra de Progresso</title>
 		  
 		  <link rel="stylesheet" href="style.css">
 	</head>
 	
 	<body>
-	<h1>Modal</h1>
+	<button id="start">Iniciar</button>
 	
-	<button id="openBtn">Abrir Modal</button>
-	
-	<div class="modal" role="dialog" aria-labeledby="modal-title" aria-modal="true">
-			<div class="modal-content" tabindex="0">
-				<span tabindex="0" class="close">&times;</span>
-				<h2 id="modal-title">Meu Modal</h2>
-				<p>Texto do Modal</p>
-			</div>
-		</div>
-		
-		<p>Conteúdo da Página</p>
+	<div id="progressbar">
+		<div class="progressbar" role="progressbar" aria-label="Carregando" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">0%</div>
+	</div>
 	
 	<script src="main.js"></script>
 	</body>
