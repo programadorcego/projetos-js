@@ -2,18 +2,45 @@
 <html>
 	<head>
 		  <meta charset="UTF-8">
+		  <title>Visualização em Árvore</title>
+		  
 		  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-		  <title>Barra de Progresso</title>
 		  
 		  <link rel="stylesheet" href="style.css">
 	</head>
 	
 	<body>
-	<button id="start">Iniciar</button>
+	<h1>Árvore</h1>
 	
-	<div id="progressbar">
-		<div class="progressbar" role="progressbar" aria-label="Carregando" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">0%</div>
-	</div>
+		<ul class="tree" role="tree">
+		<li class="treeitem" role="treeitem" aria-expanded="false" tabindex="0">
+			<span class="caret">Bebidas quentes</span>
+		
+			<ul class="subtree" role="group">
+				<li class="treeitem" role="treeitem" tabindex="-1">Café</li>
+				<li class="treeitem" role="treeitem" tabindex="-1">Chá</li>
+				<li class="treeitem" role="treeitem" tabindex="-1">Chocolate quente</li>
+			</ul>
+		</li>
+		<li class="treeitem" role="treeitem" aria-expanded="false" tabindex="0">
+			<span class="caret">Bebidas alcoólicas</span>
+			
+			<ul class="subtree" role="group">
+				<li class="treeitem" role="treeitem" tabindex="-1">Vinho</li>
+				<li class="treeitem" role="treeitem" tabindex="-1">Cerveja</li>
+				<li class="treeitem" role="treeitem" tabindex="-1">Whisky</li>
+			</ul>
+		</li>
+		<li class="treeitem" role="treeitem" aria-expanded="false" tabindex="0">
+			<span class="caret">Bebidas não alcoólicas</span>
+			
+			<ul class="subtree" role="group">
+				<li class="treeitem" role="treeitem" tabindex="-1">Água</li>
+				<li class="treeitem" role="treeitem" tabindex="-1">Refrigerante</li>
+				<li class="treeitem" role="treeitem" tabindex="-1">Suco</li>
+			</ul>
+		</li>
+	</ul>
 	
 	<script src="main.js"></script>
 	</body>
