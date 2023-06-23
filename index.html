@@ -2,45 +2,44 @@
 <html>
 	<head>
 		  <meta charset="UTF-8">
-		  <title>Visualização em Árvore</title>
-		  
+		  <title>Audio Player</title>
 		  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 		  
 		  <link rel="stylesheet" href="style.css">
 	</head>
 	
 	<body>
-	<h1>Árvore</h1>
+	<h1>Audio Player</h1>
 	
-		<ul class="tree" role="tree">
-		<li class="treeitem" role="treeitem" aria-expanded="false" tabindex="0">
-			<span class="caret">Bebidas quentes</span>
-		
-			<ul class="subtree" role="group">
-				<li class="treeitem" role="treeitem" tabindex="-1">Café</li>
-				<li class="treeitem" role="treeitem" tabindex="-1">Chá</li>
-				<li class="treeitem" role="treeitem" tabindex="-1">Chocolate quente</li>
-			</ul>
-		</li>
-		<li class="treeitem" role="treeitem" aria-expanded="false" tabindex="0">
-			<span class="caret">Bebidas alcoólicas</span>
+	<!--<audio controls>
+		<source src="audio.mp3">
+	</audio>-->
+	
+	<div id="player" role="region" aria-label="Reprodutor de Áudio">
+		<div id="progress">
+		<div class="progressBar" role="slider" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0"></div>
+	</div>
+	
+	<div id="controls">
+			<button class="toggleButton" aria-label="Tocar">►</button>
+			<button class="stopButton" aria-label="Parar">■</button>
+			<button class="toggleMute" aria-label="Silenciar">🔊</button>
 			
-			<ul class="subtree" role="group">
-				<li class="treeitem" role="treeitem" tabindex="-1">Vinho</li>
-				<li class="treeitem" role="treeitem" tabindex="-1">Cerveja</li>
-				<li class="treeitem" role="treeitem" tabindex="-1">Whisky</li>
-			</ul>
-		</li>
-		<li class="treeitem" role="treeitem" aria-expanded="false" tabindex="0">
-			<span class="caret">Bebidas não alcoólicas</span>
-			
-			<ul class="subtree" role="group">
-				<li class="treeitem" role="treeitem" tabindex="-1">Água</li>
-				<li class="treeitem" role="treeitem" tabindex="-1">Refrigerante</li>
-				<li class="treeitem" role="treeitem" tabindex="-1">Suco</li>
-			</ul>
-		</li>
-	</ul>
+			<div>
+				<input type="range" class="control-slider" name="volume" min="0" max="100" value="100" aria-label="Volume">
+				
+				<select class="control-slider" name="playbackRate" aria-label="Velocidade">
+					<option value="50">0.5x</option>
+					<option value="75">0.75x</option>
+					<option value="100" selected>Normal</option>
+					<option value="125">1.25x</option>
+					<option value="150">1.5x</option>
+					<option value="175">1.75x</option>
+					<option value="200">2x</option>
+				</select>
+			</div>
+		</div>
+</div>
 	
 	<script src="main.js"></script>
 	</body>

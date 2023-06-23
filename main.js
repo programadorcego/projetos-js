@@ -1,70 +1,48 @@
-const items = Array.from(document.querySelectorAll(".treeitem"));
+const toggleButton = document.querySelector(".toggleButton");
+const stopButton = document.querySelector(".stopButton");
+const toggleMuteButton = document.querySelector(".toggleMute");
+const audio = new Audio("audio.mp3");
 
-items.forEach(item => {
-	item.addEventListener("keydown", handleKeydown);
-});
-
-function handleKeydown(e)
+function togglePlay()
 {
-	const currentItem = e.target;
-	const currentItemIndex = items.indexOf(currentItem);
-	
-	switch(e.key)
+	if(audio.paused || audio.ended)
 	{
-		case "ArrowDown" :
-			e.preventDefault();
-			
-			if(currentItemIndex < items.length - 1)
-			{
-				const item = (items[currentItemIndex + 1].parentElement.parentElement.ariaExpanded == "false") ? items[currentItemIndex + 1].parentElement.parentElement.nextElementSibling : items[currentItemIndex + 1];
-				selectItem(item);
-			}
-		break;
-		
-		case "ArrowUp" :
-			e.preventDefault();
-			
-			if(currentItemIndex > 0)
-			{
-				const item = (items[currentItemIndex - 1].parentElement.parentElement.ariaExpanded == "false") ? items[currentItemIndex - 1].parentElement.parentElement : items[currentItemIndex - 1];
-				selectItem(item);
-			}
-		break;
-		
-		case "ArrowRight" :
-			e.preventDefault();
-			
-			if(currentItem.ariaExpanded == "false")
-			{
-				toggleItem(currentItem, true, `${currentItem.querySelector(".subtree").scrollHeight}px`);
-			}
-		break;
-		
-		case "ArrowLeft" :
-			e.preventDefault();
-			
-			if(currentItem.ariaExpanded == "true")
-			{
-				toggleItem(currentItem, false, 0);
-			}
-		break;
+		audio.play();
+	} else
+	{
+		audio.pause();
 	}
 }
 
-function selectItem(item)
+function updateTogglePlay()
 {
-	items.forEach(item => {
-		item.tabIndex = "-1";
-	});
-	
-	item.tabIndex = "0";
-	item.focus();
+	toggleButton.textContent = (audio.paused) ? "►" : "❚❚";
+	toggleButton.ariaLabel = (audio.paused) ? "Tocar" : "Pausar";
 }
 
-function toggleItem(item, expanded, height)
+function stop()
 {
-	item.ariaExpanded = expanded;
-	item.querySelector(".subtree").classList.toggle("expanded");
-	item.querySelector(".subtree").style.minhEight = height;
-	item.querySelector(".caret").classList.toggle("caret-down");
+	if(!audio.ended)
+	{
+		audio.pause();
+		audio.currentTime = 0;
+	}
 }
+
+function toggleMute()
+{
+	audio.muted = !audio.muted;
+}
+
+function updateToggleMute()
+{
+	toggleMuteButton.textContent = audio.muted ? "🔊" : "🔈";
+	toggleMuteButton.ariaLabel = audio.muted ? "Reativar Som" : "Silenciar";
+}
+
+toggleButton.addEventListener("click", togglePlay);
+audio.addEventListener("play", updateTogglePlay);
+audio.addEventListener("pause", updateTogglePlay);
+stopButton.addEventListener("click", stop);
+toggleMuteButton.addEventListener("click", toggleMute);
+audio.addEventListener("volumechange", updateToggleMute);
