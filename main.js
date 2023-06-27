@@ -1,51 +1,54 @@
 const toggleButton = document.querySelector(".toggleButton");
 const stopButton = document.querySelector(".stopButton");
 const toggleMuteButton = document.querySelector(".toggleMute");
-const audio = new Audio("audio.mp3");
+const video = document.querySelector("#video");
 const progress = document.querySelector("#progress");
 const progressBar = document.querySelector(".progressBar");
 const sliders = document.querySelectorAll(".control-slider");
+const toggleFullscreenButton = document.querySelector(".toggleFullscreen");
+const playerContainer = document.querySelector("#player-container");
+
 
 function togglePlay()
 {
-	if(audio.paused || audio.ended)
+	if(video.paused || video.ended)
 	{
-		audio.play();
+		video.play();
 	} else
 	{
-		audio.pause();
+		video.pause();
 	}
 }
 
 function updateTogglePlay()
 {
-	toggleButton.textContent = (audio.paused) ? "►" : "❚❚";
-	toggleButton.ariaLabel = (audio.paused) ? "Tocar" : "Pausar";
+	toggleButton.textContent = (video.paused) ? "►" : "❚❚";
+	toggleButton.ariaLabel = (video.paused) ? "Tocar" : "Pausar";
 }
 
 function stop()
 {
-	if(!audio.ended)
+	if(!video.ended)
 	{
-		audio.pause();
-		audio.currentTime = 0;
+		video.pause();
+		video.currentTime = 0;
 	}
 }
 
 function toggleMute()
 {
-	audio.muted = !audio.muted;
+	video.muted = !video.muted;
 }
 
 function updateToggleMute()
 {
-	toggleMuteButton.textContent = audio.muted ? "🔊" : "🔈";
-	toggleMuteButton.ariaLabel = audio.muted ? "Reativar Som" : "Silenciar";
+	toggleMuteButton.textContent = video.muted ? "🔊" : "🔈";
+	toggleMuteButton.ariaLabel = video.muted ? "Reativar Som" : "Silenciar";
 }
 
 function handleProgress()
 {
-	const progressPercentage = Math.floor((audio.currentTime / audio.duration) * 100);
+	const progressPercentage = Math.floor((video.currentTime / video.duration) * 100);
 	progressBar.style.width = `${progressPercentage}%`;
 	progressBar.setAttribute("aria-valuenow", progressPercentage);
 }
@@ -57,18 +60,18 @@ function handleKeydown(e)
 		case "ArrowRight" :
 			e.preventDefault();
 			
-			if(audio.currentTime < audio.duration)
+			if(video.currentTime < video.duration)
 			{
-				audio.currentTime += 5;
+				video.currentTime += 5;
 			}
 		break;
 		
 		case "ArrowLeft" :
 			e.preventDefault();
 			
-			if(audio.currentTime > 0)
+			if(video.currentTime > 0)
 			{
-				audio.currentTime -= 5;
+				video.currentTime -= 5;
 			}
 		break;
 	}
@@ -76,25 +79,83 @@ function handleKeydown(e)
 
 function scrub(e)
 {
-	const scrubTime = Math.floor((e.offsetX / progress.offsetWidth) * audio.duration);
-	audio.currentTime = scrubTime;
+	const scrubTime = Math.floor((e.offsetX / progress.offsetWidth) * video.duration);
+	video.currentTime = scrubTime;
 }
 
 function updateSlider(e)
 {
-	audio[e.target.name] = Number(e.target.value) / 100;
+	video[e.target.name] = Number(e.target.value) / 100;
+}
+
+function toggleFullscreen()
+{
+	const fullscreenElement = document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement || document.msFullscreenElement;
+	
+	if(fullscreenElement)
+	{
+		exitFullscreen();
+	} else
+	{
+		launchFullscreen();
+	}
+}
+
+function launchFullscreen()
+{
+	if(playerContainer.requestFullscreen)
+	{
+		playerContainer.requestFullscreen();
+	} else if(video.mozRequestFullScreen)
+	{
+		playerContainer.mozRequestFullScreen();
+	} else if(playerContainer.webkitRequestFullscreen)
+	{
+		playerContainer.webkitRequestFullscreen();
+	} else if(video.msRequestFullscreen)
+	{
+		playerContainer.msRequestFullscreen();
+	} else
+	{
+		playerContainer.classList.toggleButton(".fullscreen");
+	}
+}
+
+function exitFullscreen()
+{
+	if(document.exitFullscreen)
+	{
+		document.exitFullscreen();
+	} else if(document.mozCancelFullScreen)
+	{
+		document.mozCancelFullScreen();
+	} else if(document.webkitExitFullscreen)
+	{
+		document.webkitExitFullscreen();
+	}
+}
+
+function updateToggleFullscreen()
+{
+	const fullscreenElement = document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement || document.msFullscreenElement;
+	
+	toggleFullscreenButton.textContent = fullscreenElement ? "▢" : "▣";
+	toggleFullscreenButton.ariaLabel = fullscreenElement ? "Sair da tela inteira" : "Tela Inteira";
 }
 
 toggleButton.addEventListener("click", togglePlay);
-audio.addEventListener("play", updateTogglePlay);
-audio.addEventListener("pause", updateTogglePlay);
+video.addEventListener("play", updateTogglePlay);
+video.addEventListener("pause", updateTogglePlay);
 stopButton.addEventListener("click", stop);
 toggleMuteButton.addEventListener("click", toggleMute);
-audio.addEventListener("volumechange", updateToggleMute);
-audio.addEventListener("timeupdate", handleProgress);
+video.addEventListener("volumechange", updateToggleMute);
+video.addEventListener("timeupdate", handleProgress);
 progressBar.addEventListener("keydown", handleKeydown);
 progress.addEventListener("click", scrub);
 
 sliders.forEach(slider => {
 	slider.addEventListener("change", updateSlider);
 });
+
+toggleFullscreenButton.addEventListener("click", toggleFullscreen);
+document.addEventListener("fullscreenchange", updateToggleFullscreen);
