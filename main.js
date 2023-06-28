@@ -1,51 +1,33 @@
-const slides = document.querySelectorAll(".mySlides");
-const dots = document.querySelectorAll(".dot");
-const prevSlide = document.querySelector(".prev");
-const nextSlide = document.querySelector(".next");
+const calendar = document.querySelector(".calendar");
+const currentDate = new Date();
+const calendarDate = new Date(
+	currentDate.getFullYear(),
+	currentDate.getMonth() + 1,
+	0
+);
 
-prevSlide.addEventListener("click", e => {
-	e.preventDefault();
-	pluSlide(-1);
-});
+calendar.querySelector(".month").innerHTML = `<h1>${calendarDate.toLocaleString("default", {month: "long"})}</h1>`;
 
-nextSlide.addEventListener("click", e => {
-	e.preventDefault();
-	pluSlide(1);
-});
-
-dots.forEach((dot, index) => {
-	dot.addEventListener("click", e => {
-		e.preventDefault();
-		currentSlide(++index);
-	});
-});
-
-let slideIndex = 1;
-showSlide(slideIndex);
-
-function pluSlide(n)
+if(Math.abs(calendarDate.getDay() - 1) > 0)
 {
-	showSlide(slideIndex += n);
+	for(let i = 0; i < Math.abs(calendarDate.getDay() - 1); i++)
+	{
+		const div = document.createElement("div");
+		div.classList.add("day");
+		calendar.appendChild(div);
+	}
 }
 
-function currentSlide(n)
+for(let i = 1; i <= calendarDate.getDate(); i++)
 {
-	showSlide(slideIndex = n);
-}
-
-function showSlide(n)
-{
-	if(n > slides.length) slideIndex = 1;
-	if(n < 1) slideIndex = slides.length;
+	const div = document.createElement("div");
+	div.classList.add("day");
 	
-	slides.forEach((slide, index) => {
-		slide.style.display = "none";
-		dots[index].classList.remove("active");
-	});
+	if(currentDate.getDate() == i)
+	{
+		div.classList.add("today");
+	}
 	
-	slides[slideIndex - 1].style.display = "block";
-	dots[slideIndex - 1].classList.add("active");
-	
-	setTimeout(() => showSlide(++slideIndex), 5000);
-	{}
+	div.textContent = i;
+	calendar.appendChild(div);
 }
