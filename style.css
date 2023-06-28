@@ -1,35 +1,30 @@
 * {box-sizing: border-box;}
 
-.calendar {
+#tictactoe {
 	display: flex;
-	flex-wrap: wrap:
-	max-width: 600px;
-	margin: 0 auto;
+	justify-content: center;
 }
 
-.calendar .day {
-	flex: 1 0 14.28%;
-	padding: 10px;
-	border: 1px solid #ccc;
-}
-
-.calendar .header {
-	font-weight: bold;
-	text-align: center;
-	background: #f2f2f2;
-}
-
-.calendar .month {
-	width: 100%;
+#board {
+	max-width: 300px;
+	max-height: 300px;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: repeat(3, 1fr);
 	background: #000;
 	color: #fff;
-	font-weight: bold;
-	text-align: center;
-	text-transform: capitalize;
 }
 
-.calendar .today {
-	background: red;
-	color: #fff;
+.square {
+	display: flex;
+	width: 100px;
+	height: 100px;
+	align-items: center;
+	font-size: 50px;
 	font-weight: bold;
+}
+
+.winner {
+	background: yellow;
+	color: #000;
 }
